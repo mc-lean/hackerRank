@@ -7,28 +7,19 @@ values.forEach(visitStore);
 function visitStore (v, i, a) {
 
 	var d = v.split(' '),
-		n = +d[0],
-		c = +d[1],
-		m = +d[2],
-		candies, r;
+		n = +d[0],	// Dollars he has
+		c = +d[1],	// Price of each chocolate
+		m = +d[2],	// Number of wrappers needed for exchange 
+		candies, total;
 
 
 	// able to by x candies
-	candies = Math.floor(n / c);
-	r = candies / m;
+	boughtCandies = Math.floor(n / c);
+
+	total = boughtCandies + (boughtCandies - 1) / (m - 1);
 	
-	console.log( "-----" );
-	console.log( m );
-	console.log( r );
 
-	if (r > 1) {
-
-		console.log( 'greater' );
-
-	}
-
-	candies += Math.floor(candies / m);
-
-	console.log( candies + " candies" );
+	console.log( Math.floor(total) );
+	
 
 }
