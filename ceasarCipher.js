@@ -1,57 +1,55 @@
-var input = "11\nmiddle-Outz\n2";
+var input = "11\nmiddle-Outz\n80";
 var values = input.split('\n');
 var n = values.shift();
 var aZ = "abcdefghijklmnopqrstuvwxyz".split("");
 var alpha = /[a-zA-z]/;
 
 
-var word = values[0].split(""),
-	key = values[1],
-	cipher;
+var word	= values[0].split("");
+var	key		= parseInt(values[1]) % 26;
 
 
+var encrypted = word.map(applyCypher);
 
-// var encrypted = word.map(applyCypher);
+console.log( word.join("") );
+console.log( encrypted.join("") );
+
+
+// for (var i = 0; i <= 26; i++) {
+// 	console.log( i % 26 );
+// }
 
 function applyCypher (v) {
-	
-	if(v.match(alpha)) {
 
-		if(v.toUpperCase() === v){
-			
-			return aZ[aZ.indexOf(v) + parseInt(key)].toUpperCase();
+	var i = aZ.indexOf(v.toLowerCase());
+	var uC = v.toUpperCase() === v;
 
-		} else {
 
-			return aZ[aZ.indexOf(v) + parseInt(key)].toLowerCase();
-			
-		}
+	if(i > -1) { 	// Is i a letter
 
-	} else {
 
-		return v; 
+
+		var newKey = i + key < 26 ? i + key : (i + key) - 26;
+
+		return uC ? aZ[newKey].toUpperCase() : aZ[newKey];
+
+	}
+
+	else {
+
+		return v;
 
 	}
 
 }
 
-// console.log( encrypted.join("") );
+function findNewKey(index, key) {
 
-console.log( "okffng-Qwvb" );
-
-function encrypt(result, word) {
-
-	var n = word.length;
+	key = key % 26;
 	
-	if(n < 1){
-		return result;
-	}
+	return index + key < 26 ? index + key : (index + key) - 26;
 
-	var w = encrypt(word.slice(1), word.length - 1);
-	console.log( w );
-	return w;
 }
 
-var e = encrypt("", word);
 
-console.log( e );
+
